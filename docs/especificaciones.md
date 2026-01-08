@@ -165,3 +165,21 @@ A continuación, se describen las entidades principales del modelo Entidad-Relac
 	
 	
 ![Comanda](./img/Comanda.png)
+
+## Imagenes de Figma
+
+** Esto es la imagen del posible Menu, esta generado con el Figma. 
+
+![Comanda](./img/Figma_Menu.png)
+
+** Esto es el apartado de cliente 
+
+![Comanda](./img/Cliente.png)
+
+** Esto es el apartado de Camarero y Cocinero 
+
+![Comanda](./img/Camarero_Cocina.png)
+
+** Y por ultimo el menu de Admin
+
+![Comanda](./img/Admin.png)
