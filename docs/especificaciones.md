@@ -1,185 +1,167 @@
-## 3.2. Herramientas y Tecnologías de Desarrollo
+---
+# Especificaciones: Comanda Digital
 
-Para la correcta ejecución del proyecto, se ha seleccionado el siguiente conjunto de herramientas:
+Breve: documento que recoge los requisitos funcionales, herramientas, diseño de interfaces y modelo de datos del proyecto "Comanda Digital".
 
-* **Diseño y Prototipado (Figma):**
-  Se utilizará Figma como herramienta principal para el diseño de interfaces. Esto permitirá definir la paleta de colores, la tipografía y la disposición de los elementos antes de empezar a programar. El objetivo es crear prototipos visuales que aseguren que la aplicación sea intuitiva y sencilla de entender para el usuario final.
+## Tabla de contenido
 
-* **Control de Versiones (GitHub):**
-  Para la gestión del código fuente se utilizará GitHub. Esta plataforma permitirá almacenar el proyecto en la nube, actuando como copia de seguridad y sistema de control de versiones. Esto garantiza que no haya pérdida de datos y permite llevar un registro detallado de todo el proceso de desarrollo y los cambios realizados.
-
-* **Entorno de Desarrollo (Visual Studio Code):**
-  La codificación del proyecto se realizará utilizando Visual Studio Code. Se ha elegido este editor por su ligereza, su amplia compatibilidad con las tecnologías web y su ecosistema de extensiones que agilizan la escritura del código.
-
-## Módulo Cliente
-
-Descripción breve: Interfaz orientada a la experiencia del cliente en sala. Acceso rápido desde QR, navegación cómoda, filtros de alérgenos y un flujo de pedido rápido.
-
-- **RF-01. Acceso Directo QR**
-	- El sistema identificará la mesa cuando el cliente escanee su código QR.
-	- Los clientes podrán ver la carta y realizar pedidos sin iniciar sesión.
-
-- **RF-02. Navegación Scroll**
-	- Todo el menú se mostrará en una única vista vertical.
-	- Las secciones (ej. Comida, Bebidas) se abrirán mediante anclajes y el sistema realizará un scroll lateral/fluido para cambiar de sección sin recargar la página.
-
-- **RF-03. Alérgenos**
-	- Habrá un filtro en una columna lateral con opciones (ej. "Sin Gluten").
-	- Al marcar alérgenos, se filtrarán (eliminarán) los productos que contengan esos ingredientes.
-	- No se usará un PDF pequeño e ilegible; la información de alérgenos será interactiva y accesible.
-
-- **RF-04. Añadido rápido**
-	- Cada tarjeta de producto tendrá un botón directo (+) que añade 1 unidad al carrito sin necesidad de abrir la ficha del producto.
-
-- **RF-05. Carrito Flotante**
-	- Un resumen del pedido estará siempre visible o accesible en la parte inferior.
-	- Permitirá confirmar la comanda con un solo toque.
-
-### Notas UX (sugerencias)
-
-- Mantener botones grandes para interacción táctil.
-- Animaciones suaves para el scroll y el añadido al carrito.
-- Mostrar claramente indicadores de precio, alérgenos y descripción breve en la tarjeta.
+- [1. Requisitos funcionales](#1-requisitos-funcionales)
+  - [1.1 Módulo Cliente](#11-módulo-cliente)
+  - [1.2 Módulo Cocina y Barra](#12-módulo-cocina-y-barra)
+  - [1.3 Módulo Administración](#13-módulo-administración)
+- [2. Herramientas y Tecnologías](#2-herramientas-y-tecnologías)
+- [3. Diseño de Interfaces (resumen técnico)](#3-diseño-de-interfaces-resumen-técnico)
+- [4. Modelo de Datos](#4-modelo-de-datos)
+- [5. Accesibilidad y Seguridad](#5-accesibilidad-y-seguridad)
+- [6. Imágenes y Recursos Visuales](#6-imágenes-y-recursos-visuales)
+- [7. Versionado](#7-versionado)
 
 ---
 
-## Módulo Cocina y Barra
+## 1 Requisitos funcionales
 
-Descripción breve: Panel de trabajo para personal de cocina y barra orientado a velocidad y claridad en órdenes, con estados y prioridades visuales.
+Se agrupan según los módulos principales del sistema. Cada RF incluye una breve descripción y criterios de aceptación básicos.
 
-- **RF-06. Tablero pedidos**
-	- Los pedidos se visualizarán en un tablero organizado por columnas de estado: Pendiente, En Preparación, Listo.
-	- El tablero se actualizará automáticamente sin recargar la página.
+### 1.1 Módulo Cliente
 
-- **RF-07. Interacciones rápidas**
-	- El cambio de estado de un pedido se realizará con un único toque en la tarjeta o arrastrando la tarjeta entre columnas.
-	- Optimizado para pantallas táctiles y uso con manos ocupadas.
+Objetivo: ofrecer una experiencia rápida y accesible para que los clientes consulten la carta y pidan desde la mesa.
 
-- **RF-08. Semáforo de prioridad**
-	- Las tarjetas cambiarán de color según tiempo de espera acumulado:
-		- Verde: Pedido reciente (dentro de tiempo óptimo).
-		- Amarillo: Pedido en tiempo límite (alerta de demora).
-		- Rojo: Pedido retrasado (prioridad máxima).
+- **RF-01 — Acceso Directo QR**
+  - Descripción: al escanear el QR la app identifica la mesa y muestra la carta sin login.
+  - Criterios de aceptación: QR mapea a una mesa y abre la vista de menú con contexto de mesa.
 
-- **RF-09. Interacciones inteligentes**
-	- El sistema resaltará visualmente notas especiales críticas (ej.: "ALERGIA", "SIN SAL") para evitar errores en cocina.
+- **RF-02 — Navegación (Scroll único)**
+  - Descripción: todo el menú en una única vista vertical; anclajes por secciones con scroll suave.
+  - Criterios: navega entre secciones sin recargar, comportamiento fluido en móvil.
 
-- **RF-10. Cierre de Mesa y Cálculo Automático**
-	- El camarero podrá seleccionar una mesa ocupada y pulsar "Pedir la Cuenta".
-	- La aplicación sumará automáticamente todos los productos consumidos en la sesión, mostrando desglose y total a cobrar.
-	- El objetivo es eliminar cálculos manuales por parte del personal.
+- **RF-03 — Filtro de Alérgenos**
+  - Descripción: columna lateral con filtros (ej. "Sin Gluten"). Al seleccionar, se ocultan productos con esos alérgenos.
+  - Criterios: la selección actualiza inmediatamente la lista de productos; opción para ver detalles de alérgenos por producto.
 
-### Notas operativas
+- **RF-04 — Añadido rápido**
+  - Descripción: botón [+] en cada tarjeta que añade 1 unidad al carrito sin abrir ficha.
+  - Criterios: al tocar, el carrito aumenta la cantidad y muestra confirmación mínima.
 
-- Registrar timestamp de llegada de pedido para calcular colores del semáforo.
-- Proveer confirmación táctil/visual al cambiar estados para evitar cambios accidentales.
+- **RF-05 — Carrito flotante**
+  - Descripción: resumen persistente en la parte inferior con acceso rápido a confirmar pedido.
+  - Criterios: visible en todas las vistas del menú, accesible con un toque.
 
----
-
-## Módulo Administración
-
-Descripción breve: Herramientas para gestionar el catálogo, mesas y QR.
-
-- **RF-11. Gestión del Catálogo**
-	- El administrador podrá crear/editar platos, precios y fotos.
-	- Incluirá un selector obligatorio de alérgenos por producto para alimentar el filtro del cliente.
-
-- **RF-12. Generación de QR**
-	- Módulo para crear mesas y descargar sus códigos QR listos para imprimir.
-
-### Recomendaciones de administración
-
-- Validar formato y tamaño de imágenes al subirlas.
-- Mantener un histórico de cambios de precios (audit trail) para facturación.
+> Nota UX: diseñar para interacción táctil, botones grandes y feedback claro al añadir productos.
 
 ---
 
-## Accesibilidad y seguridad
+### 1.2 Módulo Cocina y Barra
 
-- Usar contrastes suficientes para semáforo y textos.
-- Etiquetas ARIA en componentes interactivos (añadir, cambiar estado, filtros).
-- Validación en backend de alérgenos y notas críticas para no depender solo de la visualización.
+Objetivo: panel operativo para gestionar pedidos con visibilidad de estado y prioridad.
+
+- **RF-06 — Tablero de pedidos**
+  - Descripción: tablero tipo Kanban con columnas: Pendiente, En Preparación, Listo. Actualización en tiempo real.
+  - Criterios: nuevas órdenes aparecen automáticamente; movimiento entre columnas actualiza estado.
+
+- **RF-07 — Interacciones rápidas**
+  - Descripción: cambio de estado con un toque o arrastrando la tarjeta.
+  - Criterios: táctil-friendly, mínimo número de toques para cambiar estado.
+
+- **RF-08 — Semáforo de prioridad**
+  - Descripción: tarjetas cambian color según tiempo de espera (verde/amarillo/rojo).
+  - Criterios: color refleja regla de tiempos configurables; alertas visuales claras.
+
+- **RF-09 — Notas críticas resaltadas**
+  - Descripción: destacar notas como "ALERGIA" o "SIN SAL" con alto contraste/iconos.
+  - Criterios: notas visibles desde vista principal del pedido.
+
+- **RF-10 — Cierre de mesa y cálculo automático**
+  - Descripción: botón "Pedir la Cuenta" que suma los productos de la sesión y genera el desglose.
+  - Criterios: cálculo correcto del total, posibilidad de corregir errores antes de cerrar.
+
+> Operativa: registrar timestamps para políticas de prioridad y semáforo; confirmar cambios para evitar errores.
 
 ---
 
+### 1.3 Módulo Administración
 
-## Diseño Interfaces
+Objetivo: herramientas administrativas para gestionar catálogo, mesas y códigos QR.
 
-Esto se centrara en hablar sobre la estructura tecnica, el modelo de datos y el diseño de la interfaz de Usuario, Camarero, Cocina, Admin.
+- **RF-11 — Gestión del catálogo**
+  - Descripción: crear/editar platos, precios, fotos y asignar alérgenos obligatorios.
+  - Criterios: formulario con validación y selector de alérgenos; subida de imágenes con previsualización.
 
-	1. Frontend: 
+- **RF-12 — Generación de QR**
+  - Descripción: crear mesas y descargar códigos QR listos para impresión (PNG/SVG).
+  - Criterios: exportar QR por mesa, opción para descargar zip de varios códigos.
 
-		* Vamos a utilizar JavaScript y Tailwinds CSS
+---
 
-	2. Backend: 
+## 2 Herramientas y Tecnologías
 
-		* Vamos a utilizar Symfony 8.
-	
-	3. Infraestructura:
-	
-		* Docker Composer.
+Tabla resumen con recomendaciones prácticas.
 
-	4. Base de Datos:
+| Herramienta / Tecnología | Uso principal | Recomendación |
+|---|---|---|
+| Figma | Diseño y prototipado | Prototipos interactivos y exportación de assets optimizados.
+| GitHub | Control de versiones y CI | Usar ramas feature, PRs y GitHub Actions para CI.
+| Visual Studio Code | IDE recomendado | Instalar Prettier, ESLint y plugins de Symfony/Docker.
+| Tailwind CSS | Estilado rápido y responsive | Usar sistema de componentes y variables de diseño.
+| Symfony 8 | Backend | API-first, validación y seguridad en servidor.
+| MySQL | Base de datos relacional | Versionado de esquema y backups regulares.
+| Docker Compose | Entorno local | Contenerizar servicios (app, db, mercure).
+| Mercure | Tiempo real cocina | Suscripciones para notificaciones en tablero de cocina.
 
-		* Vamos a utilizar MySQL 
-	
-	5. Tiempo real para cocina
+---
 
-		* Mercure
+## 3 Diseño de Interfaces (resumen técnico)
 
-## 5.2. Diseño de la Base de Datos (Modelo de Datos)
+- Frontend: JavaScript (componentes) + Tailwind CSS.
+- Backend: Symfony 8 (API REST / endpoints para comanda, gestión y auth).
+- Infraestructura: Docker Compose para desarrollo y despliegue.
+- Tiempo real: Mercure para eventos de pedidos.
 
-El diseño de la base de datos es un componente crítico. Se ha diseñado un esquema relacional normalizado capaz de gestionar la casuística real del menú del restaurante (basado en el menú de "Casa Encarni"). [cite_start]El modelo soporta categorías con precios unificados, como las pizzas [cite: 11] [cite_start]o los combos, y descripciones detalladas de ingredientes.
+Recomendaciones: Componentizar vistas (MenuItem, Cart, OrdersBoard) y documentar contratos API (OpenAPI).
 
-A continuación, se describen las entidades principales del modelo Entidad-Relación:
+---
 
-### Descripción de Tablas
+## 4 Modelo de Datos
 
-* **TABLA `MESAS`**
-    * Representa las ubicaciones físicas dentro del local.
-    * Almacena el `codigo_qr` único (token) que valida que el cliente está realmente en el establecimiento.
+Entidades principales (resumen):
 
-* **TABLA `CATEGORIAS`**
-    * Permite agrupar los productos para facilitar la navegación.
-    * [cite_start]Soporta lógica de precios por grupo (ej: Categoría "Pizzas" donde todos los ítems tienen un precio base de 11€ [cite: 11]).
+- MESAS: id, codigo_qr, estado
+- CATEGORIAS: id, nombre, orden
+- PRODUCTOS: id, nombre, descripcion, precio, activo, imagen
+- ALERGENOS: id, nombre
+- PRODUCTO_ALERGENO: producto_id, alergeno_id
+- PEDIDOS: id, mesa_id, estado, timestamp_creacion, total
+- DETALLE_PEDIDO: id, pedido_id, producto_id, cantidad, notas
 
-* **TABLA `PRODUCTOS`**
-    * Contiene el catálogo gastronómico.
-    * Incluye campo `descripcion` de tipo texto largo para detallar ingredientes complejos. [cite_start]Por ejemplo, para el producto "Hamburguesa Casa Encarni", se almacenará: *"Carne de ternera 180gr, cebolla caramelizada, queso cheddar, beicon, huevo y salsa cheddar"*[cite: 36, 37].
-    * Campo `activo` (booleano) para gestión de stock.
+Notas: mantener integridad referencial y campos de auditoría (created_at, updated_at).
 
-* **TABLA `ALERGENOS` y `PRODUCTO_ALERGENO`**
-    * Se implementa una relación **Muchos a Muchos** (N:M).
-    * Un producto puede contener múltiples alérgenos (Huevo, Lácteos, Gluten) y un alérgeno está presente en múltiples productos. Esto permite el filtrado dinámico de seguridad en el cliente.
+---
 
-* **TABLA `PEDIDOS`**
-    * Cabecera de la comanda.
-    * **Estado:** Gestiona el flujo (*Pendiente* -> *En Preparación* -> *Listo*).
-    * **Timestamp:** Registra la hora exacta para el sistema de alertas visuales (semáforo) en cocina.
-    * **Total:** Almacena el cálculo automático del importe final de la mesa.
+## 5 Accesibilidad y Seguridad
 
-* **TABLA `DETALLE_PEDIDO`**
-    * Almacena las líneas individuales de cada comanda (Producto y Cantidad).
-    * Incluye `notas` para personalizaciones (ej: "Sin cebolla").
+- Garantizar contraste suficiente, tamaño de hit targets y etiquetas ARIA.
+- Validación en backend de alérgenos y notas críticas.
+- Roles: Admin, Camarero, Cocina (control de accesos y permisos).
 
-	
-	
-![Comanda](./img/Comanda.png)
+---
 
-## Imagenes de Figma
+## 6 Imágenes y Recursos Visuales
 
-** Esto es la imagen del posible Menu, esta generado con el Figma. 
+Las imágenes de diseño se almacenan en `docs/img/`.
 
-![Comanda](./img/Figma_Menu.png)
+![Comanda - mockup general](./img/Comanda.png)
 
-** Esto es el apartado de cliente 
+**Mockups de Figma**
 
-![Comanda](./img/Cliente.png)
+- Menú (Figma)
+  ![Figma Menu](./img/Figma_Menu.png)
 
-** Esto es el apartado de Camarero y Cocinero 
+- Vista Cliente
+  ![Cliente](./img/Cliente.png)
 
-![Comanda](./img/Camarero_Cocina.png)
+- Vista Camarero / Cocina
+  ![Camarero y Cocina](./img/Camarero_Cocina.png)
 
-** Y por ultimo el menu de Admin
+- Panel Admin
+  ![Admin](./img/Admin.png)
 
-![Comanda](./img/Admin.png)
+---
