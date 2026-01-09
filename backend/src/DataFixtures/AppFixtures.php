@@ -13,7 +13,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // ==================== ALÉRGENOS ====================
+
         $alergenos = [];
         $alergenosData = [
             ['nombre' => 'Gluten', 'icono' => '🌾'],
@@ -40,7 +40,6 @@ class AppFixtures extends Fixture
             $alergenos[$data['nombre']] = $alergeno;
         }
 
-        // ==================== CATEGORÍAS ====================
         $categorias = [];
         $categoriasData = [
             ['nombre' => 'Raciones', 'descripcion' => 'Raciones para compartir', 'orden' => 1],
@@ -65,9 +64,8 @@ class AppFixtures extends Fixture
             $categorias[$data['nombre']] = $categoria;
         }
 
-        // ==================== PRODUCTOS ====================
         $productosData = [
-            // ========== RACIONES ==========
+
             [
                 'nombre' => 'Carne en salsa',
                 'descripcion' => 'Ración de carne en salsa casera',
@@ -149,7 +147,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'fritura.jpg'
             ],
 
-            // ========== COMBOS (TODOS 6€) ==========
             [
                 'nombre' => 'Combo Carne kebab con patatas',
                 'descripcion' => 'Carne kebab acompañada de patatas fritas',
@@ -175,7 +172,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'combo-nuggets.jpg'
             ],
 
-            // ========== PIZZAS (TODAS 11€) ==========
             [
                 'nombre' => 'Pizza York y Queso',
                 'descripcion' => 'Jamón york, queso, mozzarella y orégano',
@@ -241,7 +237,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'pizza-hamburguesa.jpg'
             ],
 
-            // ========== BOCADILLOS ==========
             [
                 'nombre' => 'Bocata XXL',
                 'descripcion' => 'Lomo, queso, huevo, beicon, tomate y lechuga',
@@ -331,7 +326,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'bocadillo-atun-completo.jpg'
             ],
 
-            // ========== SÁNDWICHES ==========
             [
                 'nombre' => 'Sándwich Mixto',
                 'descripcion' => 'Jamón york y queso',
@@ -357,7 +351,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'sandwich-vegetal.jpg'
             ],
 
-            // ========== HAMBURGUESAS ==========
             [
                 'nombre' => 'Hamburguesa Normal',
                 'descripcion' => 'Carne, tomate, queso y lechuga',
@@ -383,7 +376,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'hamburguesa-casa-encarni.jpg'
             ],
 
-            // ========== KEBABS ==========
             [
                 'nombre' => 'Kebab',
                 'descripcion' => 'Tomate, lechuga, huevo, queso, carne kebab y salsa kebab',
@@ -393,7 +385,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'kebab.jpg'
             ],
 
-            // ========== BEBIDAS ==========
             [
                 'nombre' => 'Coca-Cola',
                 'descripcion' => 'Coca-Cola, Zero o Light',
@@ -435,7 +426,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'aquarius.jpg'
             ],
 
-            // ========== CERVEZAS ==========
             [
                 'nombre' => 'Caña',
                 'descripcion' => 'Caña de cerveza',
@@ -461,7 +451,6 @@ class AppFixtures extends Fixture
                 'imagen' => 'botellin.jpg'
             ],
 
-            // ========== VINOS Y COPAS ==========
             [
                 'nombre' => 'Tinto de verano',
                 'descripcion' => 'Vino tinto con gaseosa',
@@ -479,7 +468,7 @@ class AppFixtures extends Fixture
                 'imagen' => 'copa-vino.jpg'
             ],
 
-            // ========== CAFÉS ==========
+
             [
                 'nombre' => 'Café solo',
                 'descripcion' => 'Café espresso',
@@ -524,7 +513,6 @@ class AppFixtures extends Fixture
             $manager->persist($producto);
         }
 
-        // ==================== MESAS ====================
         for ($i = 1; $i <= 15; $i++) {
             $mesa = new Mesa();
             $mesa->setNumero($i);
