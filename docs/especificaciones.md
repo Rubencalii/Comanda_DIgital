@@ -131,7 +131,7 @@ Seleccion de herramientas basada en robustez, comunidad y rendimiento.
 | **Frontend** | JavaScript (ES6+) + **Tailwind CSS** | Desarrollo agil de interfaces responsivas y ligeras. |
 | **Backend** | **Symfony 8** (PHP) | Framework MVC robusto, seguro y escalable. |
 | **Gestor Paquetes** | **Composer** | Gestion de dependencias de PHP. |
-| **Base de Datos** | **MySQL 8** | Motor relacional fiable para integridad de datos. |
+| **Base de Datos** | **MariaDB** | Motor relacional fiable para integridad de datos. |
 | **Infraestructura** | **Docker** & **Docker Compose** | Contenerizacion para entorno de desarrollo identico a produccion. |
 | **Tiempo Real** | **Mercure** | Protocolo de notificaciones Push para el tablero de cocina. |
 | **Control Versiones** | GitHub | Git Flow, Pull Requests y backup en la nube. |

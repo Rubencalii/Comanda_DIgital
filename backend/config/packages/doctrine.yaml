@@ -2,8 +2,8 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
-        # MySQL 8.0 para Comanda Digital
-        server_version: '8.0'
+        # MariaDB local para Comanda Digital
+        server_version: '10.11.13-MariaDB'
         driver: pdo_mysql
 
         profiling_collect_backtrace: '%kernel.debug%'
